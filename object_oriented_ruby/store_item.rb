@@ -1,40 +1,42 @@
-# item_01 = {price: 10, size: "large", color: "red", fragile: true}
-# item_02 = {price: 50, size: "medium", color: "blue", fragile: false}
-# item_03 = {:price => 25, :size => "small", :color => "white", :fragile => true}
-
-# puts "Item 1 costs #{item_01[:price]} dollars and is a #{item_01[:size]} object. The color is #{item_01[:color]}."
-# puts "Item 2 costs #{item_02[:price]} dollars and is a #{item_02[:size]} object. The color is #{item_02[:color]}."
-# puts "Item 3 costs #{item_03[:price]} dollars and is a #{item_03[:size]} object. The color is #{item_03[:color]}."
-
 class StoreItem
+  attr_reader :price, :size, :color
 
-  def initialize(input_price, input_size, input_color)
-    @price = input_price
-    @size = input_size
-    @color = input_color
-  end
-
-  def price
-    @price
-  end
-
-  def size
-    @size
-  end
-
-  def color
-    @color
+  def initialize(input_options)
+    @price = input_options[:price]
+    @size = input_options[:size]
+    @color = input_options[:color]
   end
 
   def prints_info
-    puts "Item costs #{price}, is #{size} in size and is #{color}"
+    puts "This product costs #{price}, is #{size} in size and is #{color}. This product will last #{shelf_life} days."
   end
 end
 
-pencil = StoreItem.new(5, "small", "red")
-pan = StoreItem.new(100, "large", "grey")
-basketball = StoreItem.new(25, "medium", "orange")
+class Food < StoreItem
+  def initialize(input_options)
+    super(input_options)
+    @shelf_life = input_options[:shelf_life]
+  end
+end
 
-pencil.prints_info
-pan.prints_info
-basketball.prints_info
+apple = Food.new(
+                price: 5,
+                size: "small",
+                color: "red",
+                shelf_life: 10
+                )
+watermelon = Food.new(
+                      price: 20, 
+                      size: "large",
+                      color: "green",
+                      shelf_life: 6
+                      )
+grapefruit = Food.new(
+                      price: 10,
+                      size: "medium",
+                      color: "pink",
+                      shelf_life: 8
+                      )
+p apple
+p watermelon
+p grapefruit
